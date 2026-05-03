@@ -1,0 +1,8 @@
+# Cloudflare Pages — przekierowania
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Ładny URL panelu admina
+/admin   /admin/index.html   200
+
+# 404 fallback dla nieistniejących ścieżek
+/*       /404.html           404

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel admina — Lisia Górka</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- LOGIN SCREEN -->
+  <div class="admin-login" id="login-screen">
+    <div class="admin-login-card">
+      <div class="admin-login-header">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 213 250" xmlns="http://www.w3.org/2000/svg" fill="currentColor" style="width: 48px; height: 48px;">
+            <path d="M187.91,24.87c-1.91-5.22-24.53-4.98-42.9,5.53-3.47,1.98-24.58,14.52-22.82,28.33,1,7.82,8.44,9,16.45,18.59,16.8,20.12,13.52,50.24,11.07,50.73-2.05.41-.69-19.65-15.2-34.62-20.74-21.39-56.87-14.79-58.8-26.56-.25-1.54.08-3.6,1.97-6.22,7.17-9.04,19.87-9.22,27.77-13.33,4.24-2.2,9.67-6.12,14.77-13.67,1.05-1.56-.05-3.66-1.92-3.71-6.09-.17-17.18-1.4-24.27-5.94-7.75-4.96-5.91-10.89-4.01-20.13.16-.79-.58-1.48-1.36-1.26-7.34,2.08-11.21,3.89-14.24,6.18-1.88-3.24-2.61-5.9-3.22-8.01-.23-.81-1.26-1.04-1.82-.42-9.63,10.62-14.27,17.59-16.68,25.55-.72,2.01-1.52,4.43-2.3,7.19-4.79,16.89-5.06,33.05-.28,67.18,1.9,13.57,4.69,30.58,8.88,50.16.31,1.47,1.62,2.52,3.12,2.52h11.23c.6,0,1.05-.56.9-1.15-2.21-8.94-9.35-40.17-.3-44.63,2.15-1.06,4.4-.21,4.6-.13,10.03,3.94,5.65,36.96,4.47,44.86-.08.56.35,1.06.92,1.06h13.28c.55,0,.97-.48.92-1.03-1.29-12.47,4.04-22.63,11.1-24.67,9.53-2.76,21.09,9.58,20.65,10.37-.14.26-1.64-.62-5.13-1.12-.94-.13-3.53-.49-5.78-.24-4.16.48-9.48,3.31-11.09,8.5-1.11,3.54-.04,6.76.56,8.19h40.11c5.73,0,10.47-4.39,11-10.1.47-5.07,1.37-11,3.06-17.45,7.03-26.9,20.01-35.17,17.27-51.81-2.01-12.2-10.81-13.79-9.72-24.08,1.53-14.34,19.55-19.75,17.76-24.65ZM84.17,26.43c2.17.11,3.85,1.95,3.74,4.13-.11,2.17-1.95,3.85-4.13,3.74s-3.85-1.95-3.74-4.13c.11-2.17,1.95-3.85,4.13-3.74Z"/>
+          </svg>
+        </span>
+        <h1 class="login-title">Panel admina</h1>
+        <p class="login-sub">Zaloguj się przez GitHub Personal Access Token. Wszystkie zmiany zapisują się w repozytorium i automatycznie trafiają na produkcję.</p>
+      </div>
+
+      <form class="admin-form" id="login-form">
+        <div class="field">
+          <label for="github-owner">GitHub — właściciel (user/org)</label>
+          <input type="text" id="github-owner" required placeholder="np. jankowalski" autocomplete="username">
+        </div>
+        <div class="field">
+          <label for="github-repo">Nazwa repo</label>
+          <input type="text" id="github-repo" required placeholder="np. lisiagorka">
+        </div>
+        <div class="field">
+          <label for="github-branch">Gałąź</label>
+          <input type="text" id="github-branch" value="main" required>
+        </div>
+        <div class="field">
+          <label for="github-token">Personal Access Token</label>
+          <input type="password" id="github-token" required placeholder="ghp_..." autocomplete="current-password">
+          <p class="field-help">Token z uprawnieniem <code>Contents — Read and write</code> (lub klasyczny scope <code>repo</code>). Token zapisuje się tylko w&nbsp;<code>sessionStorage</code> i&nbsp;ginie po zamknięciu karty.</p>
+        </div>
+
+        <div class="login-error" id="login-error" hidden></div>
+
+        <button type="submit" class="btn btn-primary login-btn" id="login-submit">
+          <span class="login-btn-label">Zaloguj się</span>
+          <span class="arrow">→</span>
+        </button>
+
+        <p class="login-hint">
+          <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Utwórz nowy token na GitHubie ↗</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- EDITOR SCREEN -->
+  <div class="admin-app" id="editor-screen" hidden>
+    <header class="admin-header">
+      <div class="admin-header-inner">
+        <div class="admin-header-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 213 250" xmlns="http://www.w3.org/2000/svg" fill="currentColor" style="width: 28px; height: 28px;">
+              <path d="M187.91,24.87c-1.91-5.22-24.53-4.98-42.9,5.53-3.47,1.98-24.58,14.52-22.82,28.33,1,7.82,8.44,9,16.45,18.59,16.8,20.12,13.52,50.24,11.07,50.73-2.05.41-.69-19.65-15.2-34.62-20.74-21.39-56.87-14.79-58.8-26.56-.25-1.54.08-3.6,1.97-6.22,7.17-9.04,19.87-9.22,27.77-13.33,4.24-2.2,9.67-6.12,14.77-13.67,1.05-1.56-.05-3.66-1.92-3.71-6.09-.17-17.18-1.4-24.27-5.94-7.75-4.96-5.91-10.89-4.01-20.13.16-.79-.58-1.48-1.36-1.26-7.34,2.08-11.21,3.89-14.24,6.18-1.88-3.24-2.61-5.9-3.22-8.01-.23-.81-1.26-1.04-1.82-.42-9.63,10.62-14.27,17.59-16.68,25.55-.72,2.01-1.52,4.43-2.3,7.19-4.79,16.89-5.06,33.05-.28,67.18,1.9,13.57,4.69,30.58,8.88,50.16.31,1.47,1.62,2.52,3.12,2.52h11.23c.6,0,1.05-.56.9-1.15-2.21-8.94-9.35-40.17-.3-44.63,2.15-1.06,4.4-.21,4.6-.13,10.03,3.94,5.65,36.96,4.47,44.86-.08.56.35,1.06.92,1.06h13.28c.55,0,.97-.48.92-1.03-1.29-12.47,4.04-22.63,11.1-24.67,9.53-2.76,21.09,9.58,20.65,10.37-.14.26-1.64-.62-5.13-1.12-.94-.13-3.53-.49-5.78-.24-4.16.48-9.48,3.31-11.09,8.5-1.11,3.54-.04,6.76.56,8.19h40.11c5.73,0,10.47-4.39,11-10.1.47-5.07,1.37-11,3.06-17.45,7.03-26.9,20.01-35.17,17.27-51.81-2.01-12.2-10.81-13.79-9.72-24.08,1.53-14.34,19.55-19.75,17.76-24.65ZM84.17,26.43c2.17.11,3.85,1.95,3.74,4.13-.11,2.17-1.95,3.85-4.13,3.74s-3.85-1.95-3.74-4.13c.11-2.17,1.95-3.85,4.13-3.74Z"/>
+            </svg>
+          </span>
+          <span>Lisia Górka — admin</span>
+          <span class="admin-repo" id="admin-repo"></span>
+        </div>
+        <div class="admin-header-actions">
+          <span class="admin-status" id="admin-status"></span>
+          <a href="/" target="_blank" class="btn btn-ghost btn-sm" rel="noopener">Podgląd ↗</a>
+          <button class="btn btn-primary btn-sm" id="save-btn">
+            <span class="save-label">Zapisz zmiany</span>
+          </button>
+          <button class="btn-link" id="logout-btn">Wyloguj</button>
+        </div>
+      </div>
+      <nav class="admin-tabs" id="admin-tabs">
+        <button class="admin-tab active" data-tab="hero">Hero</button>
+        <button class="admin-tab" data-tab="sections">Sekcje</button>
+        <button class="admin-tab" data-tab="contact">Kontakt</button>
+        <button class="admin-tab" data-tab="raw">JSON</button>
+      </nav>
+    </header>
+
+    <main class="admin-main">
+
+      <!-- HERO TAB -->
+      <section class="admin-panel active" data-panel="hero">
+        <div class="admin-container">
+          <h2 class="admin-h2">Hero</h2>
+          <p class="admin-lead">Pierwszy ekran strony głównej — duże zdjęcie, hasło i przyciski CTA.</p>
+
+          <div class="admin-card">
+            <div class="field">
+              <label>Zdjęcie hero</label>
+              <div class="image-field" data-field="hero.image">
+                <img class="image-preview" id="hero-image-preview" alt="">
+                <div class="image-actions">
+                  <input type="text" id="hero-image-url" placeholder="/assets/images/hero-winter.jpg">
+                  <label class="btn btn-ghost btn-sm">
+                    Wgraj plik
+                    <input type="file" accept="image/*" hidden data-upload-target="hero-image-url" data-preview="hero-image-preview">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label for="hero-alt">Tekst alternatywny zdjęcia</label>
+              <input type="text" id="hero-alt" placeholder="Domki Lisia Górka...">
+            </div>
+            <div class="field">
+              <label for="hero-eyebrow">Eyebrow (mały tekst nad nagłówkiem)</label>
+              <input type="text" id="hero-eyebrow" placeholder="Domki na Pomorzu">
+            </div>
+            <div class="field">
+              <label for="hero-headline">Hasło / nagłówek</label>
+              <input type="text" id="hero-headline" placeholder="Lisia Górka">
+              <p class="field-help">Ostatnie słowo zostanie automatycznie wyróżnione kolorem koralowym.</p>
+            </div>
+            <div class="field">
+              <label for="hero-subline">Podtytuł</label>
+              <textarea id="hero-subline" rows="2"></textarea>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="hero-cta1-label">CTA #1 — etykieta</label>
+                <input type="text" id="hero-cta1-label" placeholder="Zarezerwuj">
+              </div>
+              <div class="field">
+                <label for="hero-cta1-url">CTA #1 — link</label>
+                <input type="text" id="hero-cta1-url" placeholder="https://www.booking.com/...">
+              </div>
+              <div class="field">
+                <label for="hero-cta2-label">CTA #2 — etykieta</label>
+                <input type="text" id="hero-cta2-label" placeholder="Kontakt">
+              </div>
+              <div class="field">
+                <label for="hero-cta2-url">CTA #2 — link</label>
+                <input type="text" id="hero-cta2-url" placeholder="/kontakt.html">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTIONS TAB -->
+      <section class="admin-panel" data-panel="sections" hidden>
+        <div class="admin-container">
+          <div class="admin-h2-row">
+            <div>
+              <h2 class="admin-h2">Sekcje strony głównej</h2>
+              <p class="admin-lead">Każda sekcja może być tekstowo-obrazkowa, mapą lub gridem udogodnień.</p>
+            </div>
+            <button class="btn btn-ghost btn-sm" id="add-section-btn">+ Dodaj sekcję</button>
+          </div>
+
+          <div class="sections-list" id="sections-list">
+            <!-- dynamic -->
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT TAB -->
+      <section class="admin-panel" data-panel="contact" hidden>
+        <div class="admin-container">
+          <h2 class="admin-h2">Kontakt</h2>
+          <p class="admin-lead">Adres, telefon, email i wskazówki dojazdu — używane na stronie kontaktowej i w stopce.</p>
+
+          <div class="admin-card">
+            <div class="field">
+              <label for="contact-address">Adres (każda linia osobno)</label>
+              <textarea id="contact-address" rows="3" placeholder="Lisia Górka&#10;Dębina, woj. pomorskie"></textarea>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="contact-phone">Telefon (z kodem kraju)</label>
+                <input type="text" id="contact-phone" placeholder="+48 600 000 000">
+              </div>
+              <div class="field">
+                <label for="contact-email">Email</label>
+                <input type="email" id="contact-email" placeholder="kontakt@lisiagorka.pl">
+              </div>
+            </div>
+            <div class="field">
+              <label for="contact-map">Google Maps — embed URL (atrybut <code>src</code> z &lt;iframe&gt;)</label>
+              <textarea id="contact-map" rows="3" placeholder="https://www.google.com/maps/embed?..."></textarea>
+              <p class="field-help">W Google Maps: udostępnij → osadź mapę → skopiuj <code>src</code> z kodu HTML.</p>
+            </div>
+            <div class="field">
+              <label for="contact-directions">Wskazówki dojazdu (HTML)</label>
+              <textarea id="contact-directions" rows="6"></textarea>
+              <p class="field-help">Możesz używać znaczników HTML (np. <code>&lt;p&gt;</code>, <code>&lt;strong&gt;</code>).</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RAW JSON TAB -->
+      <section class="admin-panel" data-panel="raw" hidden>
+        <div class="admin-container">
+          <h2 class="admin-h2">Surowy JSON</h2>
+          <p class="admin-lead">Zaawansowani: bezpośredni podgląd tego, co zostanie zapisane do <code>content/site.json</code>.</p>
+          <textarea id="raw-json" class="raw-json" readonly></textarea>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" hidden></div>
+
+  <!-- SECTION TEMPLATE -->
+  <template id="section-template">
+    <div class="section-card" data-section-card>
+      <div class="section-card-head">
+        <button class="section-card-toggle" data-action="toggle" aria-expanded="false">
+          <span class="section-card-num"></span>
+          <span class="section-card-title">Nowa sekcja</span>
+          <span class="section-card-chevron">▾</span>
+        </button>
+        <div class="section-card-actions">
+          <button class="btn-icon" data-action="up" title="Przesuń wyżej">↑</button>
+          <button class="btn-icon" data-action="down" title="Przesuń niżej">↓</button>
+          <button class="btn-icon btn-icon-danger" data-action="delete" title="Usuń">×</button>
+        </div>
+      </div>
+      <div class="section-card-body" hidden>
+        <div class="grid-2">
+          <div class="field">
+            <label>Tytuł</label>
+            <input type="text" data-field="title">
+          </div>
+          <div class="field">
+            <label>ID sekcji (slug w URL)</label>
+            <input type="text" data-field="id" pattern="[a-z0-9-]+">
+            <p class="field-help">Tylko małe litery, cyfry, myślniki. Używane jako kotwica w nawigacji.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label>Eyebrow (mały tekst nad tytułem)</label>
+          <input type="text" data-field="eyebrow" placeholder="01 — Miejsce">
+        </div>
+        <div class="field">
+          <label>Typ sekcji</label>
+          <select data-field="image_position">
+            <option value="right">Tekst + zdjęcie po prawej</option>
+            <option value="left">Tekst + zdjęcie po lewej</option>
+            <option value="map">Tekst + mapa Google (na całą szerokość)</option>
+            <option value="grid">Tylko tekst (lista wyposażenia jako grid)</option>
+          </select>
+        </div>
+        <div class="field" data-image-field>
+          <label>Zdjęcie</label>
+          <div class="image-field">
+            <img class="image-preview" data-section-image-preview alt="">
+            <div class="image-actions">
+              <input type="text" data-field="image" placeholder="/assets/images/...">
+              <label class="btn btn-ghost btn-sm">
+                Wgraj plik
+                <input type="file" accept="image/*" hidden data-section-upload>
+              </label>
+            </div>
+          </div>
+          <input type="text" data-field="image_alt" placeholder="Tekst alternatywny zdjęcia" style="margin-top: 0.5rem;">
+        </div>
+        <div class="field">
+          <label>Treść (HTML)</label>
+          <textarea data-field="content" rows="8"></textarea>
+          <p class="field-help">Możesz używać <code>&lt;p&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;ul&gt;&lt;li&gt;</code>, <code>&lt;em&gt;</code>.</p>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="/admin/admin.js"></script>
+</body>
+</html>

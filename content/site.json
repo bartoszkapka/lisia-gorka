@@ -1,0 +1,79 @@
+{
+  "site": {
+    "title": "Lisia Górka",
+    "tagline": "Dębina, Pomorze"
+  },
+  "hero": {
+    "image": "/assets/images/hero-winter.jpg",
+    "image_alt": "Domki Lisia Górka w zimowej scenerii",
+    "eyebrow": "Domki na Pomorzu",
+    "headline": "Lisia Górka",
+    "subline": "Trzy domki na skraju lasu, między wydmami a borem. Dębina, kilka kroków od Bałtyku.",
+    "cta_primary": {
+      "label": "Zarezerwuj",
+      "url": "https://www.booking.com/Share-tXO2Yl"
+    },
+    "cta_secondary": {
+      "label": "Kontakt",
+      "url": "/kontakt.html"
+    }
+  },
+  "sections": [
+    {
+      "id": "o-kompleksie",
+      "title": "O kompleksie",
+      "eyebrow": "01 — Miejsce",
+      "image": "/assets/images/cottages-summer.jpg",
+      "image_alt": "Widok z lotu ptaka na domki Lisia Górka latem",
+      "image_position": "right",
+      "content": "<p>Lisia Górka to trzy starannie zaprojektowane domki letniskowe ukryte na skraju starego boru sosnowego, w samym sercu pomorskiej Dębiny.</p><p>Każdy z nich stoi na własnej, ogrodzonej działce — z widokiem na drzewa, ciszą, którą trudno znaleźć w miastach, i poczuciem przestrzeni, jakiego nie zapewni żaden hotel.</p><p>Powstały z myślą o rodzinach i grupach przyjaciół, którzy chcą wytchnienia od zgiełku, ale nie rezygnują z komfortu.</p>"
+    },
+    {
+      "id": "domki",
+      "title": "Domki",
+      "eyebrow": "02 — Wnętrza",
+      "image": "/assets/images/hero-winter.jpg",
+      "image_alt": "Domki Lisia Górka zimą w słońcu",
+      "image_position": "left",
+      "content": "<p>Każdy z trzech domków mieści <strong>do 8 osób</strong> w czterech sypialniach, z dwiema łazienkami i przestronnym salonem z aneksem kuchennym.</p><p>W środku znajdziesz pełne wyposażenie kuchenne, kominek, telewizor i Wi‑Fi. Na zewnątrz — zadaszony taras z widokiem na las, miejsce na grilla i ogrodzony ogród.</p><p>Drewno, biel i światło — wnętrza są jasne, ciepłe i pozbawione zbędnego wystroju. Wszystko po to, żeby uwagę zwrócić na to, co za oknem.</p>"
+    },
+    {
+      "id": "lokalizacja",
+      "title": "Lokalizacja",
+      "eyebrow": "03 — Mapa",
+      "image": "",
+      "image_alt": "",
+      "image_position": "map",
+      "content": "<p>Dębina to niewielka wieś w województwie pomorskim, w powiecie słupskim — między Ustką a Rowami, na skraju Słowińskiego Parku Krajobrazowego.</p><p>Do plaży w Poddąbiu jedzie się <strong>kilka minut samochodem</strong> albo idzie spacerem przez bór. Ustka — 12 km. Słupsk — 30 km. Lotnisko w Gdańsku — niespełna 2 godziny drogi.</p>"
+    },
+    {
+      "id": "w-okolicy",
+      "title": "W okolicy",
+      "eyebrow": "04 — Atrakcje",
+      "image": "/assets/images/cottages-summer.jpg",
+      "image_alt": "Lisia Górka i otaczający las latem",
+      "image_position": "right",
+      "content": "<p>Klifowa plaża w Poddąbiu, ruchome wydmy w Słowińskim Parku Narodowym, latarnia morska w Czołpinie, port rybacki w Ustce.</p><p>Sieć ścieżek rowerowych prowadzi prosto z lasu nad morze. W sezonie — kajaki na Łupawie, rejsy z Ustki, bursztyniarskie bazary po sztormie. Zimą — puste plaże, mgła nad jeziorem Gardno, cisza w którą wsiąka się od pierwszego wieczoru.</p>"
+    },
+    {
+      "id": "wyposazenie",
+      "title": "Wyposażenie",
+      "eyebrow": "05 — Udogodnienia",
+      "image": "",
+      "image_alt": "",
+      "image_position": "grid",
+      "content": "<ul><li>Wi-Fi w każdym domku</li><li>Bezpłatny parking na działce</li><li>Pełne wyposażenie kuchenne</li><li>Kominek i drewno opałowe</li><li>Miejsce na grilla, ogród</li><li>Pościel i ręczniki w cenie</li><li>Plac zabaw dla dzieci</li><li>Zwierzęta mile widziane</li></ul>"
+    }
+  ],
+  "contact": {
+    "address_lines": [
+      "Lisia Górka",
+      "Dębina, woj. pomorskie"
+    ],
+    "phone": "+48 600 000 000",
+    "phone_label": "+48 600 000 000",
+    "email": "kontakt@lisiagorka.pl",
+    "map_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2349.4!2d17.2!3d54.66!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zRMSZYmluYSwgUG9sYW5k!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl",
+    "directions": "<p><strong>Z Trójmiasta (A1, S6, DK6):</strong> około 1h 45 min jazdy. W Słupsku zjazd na Ustkę, dalej drogą wojewódzką nr 203 w stronę Rowów. W Dębinie kierować się drogowskazami w głąb wsi.</p><p><strong>Pociągiem:</strong> najbliższa stacja PKP — Ustka. Stamtąd taksówką lub busem do Dębiny (~20 min).</p><p><strong>Współrzędne GPS:</strong> 54.6601°N, 17.1869°E</p>"
+  }
+}
