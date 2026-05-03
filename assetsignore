@@ -1,0 +1,23 @@
+# Pliki, których NIE chcemy publikować jako statyki strony.
+# Składnia jak w .gitignore.
+
+# Pliki konfiguracyjne i metadane projektu
+wrangler.jsonc
+wrangler.toml
+package.json
+package-lock.json
+.assetsignore
+README.md
+
+# Środowisko / system
+node_modules
+.git
+.github
+.gitignore
+.DS_Store
+.vscode
+
+# Pliki tymczasowe
+*.log
+.env
+.env.*

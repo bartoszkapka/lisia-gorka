@@ -1,8 +1,7 @@
-# Cloudflare Pages — przekierowania
-# https://developers.cloudflare.com/pages/configuration/redirects/
+# Cloudflare — przekierowania (działają zarówno w Pages jak i Workers Static Assets)
 
-# Ładny URL panelu admina
+# Ładny URL panelu admina (bez końcowego /index.html)
 /admin   /admin/index.html   200
 
-# 404 fallback dla nieistniejących ścieżek
-/*       /404.html           404
+# Uwaga: 404 jest obsługiwany przez "not_found_handling": "404-page" w wrangler.jsonc.
+# Nie dajemy tutaj /* → 404, bo to złapałoby też istniejące strony.
