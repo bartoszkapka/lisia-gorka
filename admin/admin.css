@@ -86,7 +86,6 @@
   font-weight: 400;
   margin: 0 0 0.5rem 0;
   letter-spacing: -0.01em;
-  font-variation-settings: 'opsz' 36, 'SOFT' 50;
 }
 .login-sub {
   font-size: 0.92rem;
@@ -258,7 +257,6 @@
   align-items: center;
   gap: 0.75rem;
   font-family: var(--ff-display);
-  font-variation-settings: 'opsz' 24, 'SOFT' 50;
   font-size: 1.05rem;
   font-weight: 400;
 }
@@ -347,7 +345,6 @@
 
 .admin-h2 {
   font-family: var(--ff-display);
-  font-variation-settings: 'opsz' 96, 'SOFT' 50;
   font-size: clamp(1.6rem, 3vw, 2.25rem);
   font-weight: 400;
   letter-spacing: -0.01em;

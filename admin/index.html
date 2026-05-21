@@ -39,8 +39,12 @@
         </div>
         <div class="field">
           <label for="github-token">Personal Access Token</label>
-          <input type="password" id="github-token" required placeholder="ghp_..." autocomplete="current-password">
-          <p class="field-help">Token z uprawnieniem <code>Contents — Read and write</code> (lub klasyczny scope <code>repo</code>). Token zapisuje się tylko w&nbsp;<code>sessionStorage</code> i&nbsp;ginie po zamknięciu karty.</p>
+          <input type="password" id="github-token" required placeholder="github_pat_..." autocomplete="current-password">
+          <p class="field-help">
+            <strong>Wymagane uprawnienie:</strong> <code>Contents — Read <em>and</em> write</code><br>
+            (sam <em>Read</em> wystarczy do zalogowania, ale zapis będzie się wywalał z błędem 403).<br>
+            Token zapisuje się tylko w&nbsp;<code>sessionStorage</code> i&nbsp;ginie po zamknięciu karty.
+          </p>
         </div>
 
         <div class="login-error" id="login-error" hidden></div>

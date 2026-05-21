@@ -1,0 +1,10 @@
+{
+  "name": "lisiagorka",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Strona Lisia Górka — czysty static, brak build-stepu.",
+  "scripts": {
+    "build": "echo 'Static site — nothing to build.'",
+    "deploy": "echo 'Static site — Cloudflare Pages deploys files automatically.'"
+  }
+}

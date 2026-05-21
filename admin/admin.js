@@ -95,8 +95,7 @@
     const r = await gh(`/contents/${filePath}?ref=${encodeURIComponent(state.config.branch)}`);
     if (!r.ok) {
       if (r.status === 404) return null;
-      const body = await safeText(r);
-      throw new Error(`GET ${filePath}: ${r.status} ${body}`);
+      throw await ghError(r, 'GET', filePath);
     }
     return r.json();
   }
@@ -115,14 +114,71 @@
       body: JSON.stringify(body),
     });
     if (!r.ok) {
-      const text = await safeText(r);
-      throw new Error(`PUT ${filePath}: ${r.status} ${text}`);
+      throw await ghError(r, 'PUT', filePath);
     }
     return r.json();
   }
 
+  // Parses GitHub error response into a structured Error object
+  async function ghError(response, method, filePath) {
+    const text = await safeText(response);
+    let ghMessage = '';
+    try {
+      const parsed = JSON.parse(text);
+      ghMessage = parsed.message || '';
+    } catch {}
+    const err = new Error(`${method} ${filePath}: ${response.status}${ghMessage ? ' — ' + ghMessage : ''}`);
+    err.status = response.status;
+    err.githubMessage = ghMessage;
+    return err;
+  }
+
   async function safeText(response) {
     try { return await response.text(); } catch { return ''; }
+  }
+
+  // Translate a GitHub API error into a user-friendly toast.
+  // 401 = invalid/expired token → force re-login
+  // 403 = token authenticated but lacks write permission → keep session, instruct user
+  // 404 = repo/branch not found
+  // 409 = sha conflict (someone else updated the file)
+  // 422 = validation (e.g. bad branch)
+  // others → show GitHub's own message
+  function handleGhError(err, contextNoun /* "zapisu" or "uploadu" */) {
+    const ctx = contextNoun || 'operacji';
+    const status = err && err.status;
+    const ghMsg = (err && err.githubMessage) || '';
+
+    if (status === 401) {
+      toast(`Token nieprawidłowy lub wygasł. Zaloguj się ponownie.${ghMsg ? ' (GitHub: ' + ghMsg + ')' : ''}`, 'error');
+      setTimeout(logout, 2200);
+      return;
+    }
+    if (status === 403) {
+      // The most common cause: fine-grained PAT created with "Contents: Read-only".
+      // We deliberately do NOT log the user out — re-logging in with the same token won't help.
+      const detail = ghMsg ? ` GitHub odpowiedział: „${ghMsg}".` : '';
+      toast(
+        `Token nie ma uprawnień do zapisu w tym repozytorium.${detail} ` +
+        `Wygeneruj nowy token z uprawnieniem „Contents: Read AND write" i wklej go ponownie po wylogowaniu.`,
+        'error'
+      );
+      return;
+    }
+    if (status === 404) {
+      toast(`Nie znaleziono pliku, repo lub gałęzi. Sprawdź dane logowania.${ghMsg ? ' (GitHub: ' + ghMsg + ')' : ''}`, 'error');
+      return;
+    }
+    if (status === 409) {
+      toast('Konflikt: ktoś (lub inna karta) zmienił plik w międzyczasie. Wyloguj się i zaloguj ponownie, żeby pobrać świeżą wersję.', 'error');
+      return;
+    }
+    if (status === 422) {
+      toast(`Błąd walidacji${ghMsg ? ': ' + ghMsg : ''}. Sprawdź, czy podana gałąź istnieje.`, 'error');
+      return;
+    }
+    // fallback
+    toast(`Błąd ${ctx}: ${ghMsg || (err && err.message) || 'nieznany'}`, 'error');
   }
 
   // ============================================================================
@@ -224,15 +280,16 @@
       enterEditor();
     } catch (err) {
       console.error(err);
-      const msg = err.message || String(err);
-      if (msg.includes('401')) {
-        showError('Nieprawidłowy token lub brak uprawnień. Sprawdź, czy token ma uprawnienie „Contents: Read and write” na to repo.');
-      } else if (msg.includes('404')) {
-        showError(`Nie znaleziono repozytorium ${owner}/${repo} lub gałęzi „${branch}". Sprawdź pisownię.`);
-      } else if (msg.includes('403')) {
-        showError('Brak dostępu (403). Token nie ma uprawnień do tego repozytorium albo wyczerpał limit zapytań.');
+      const status = err && err.status;
+      const ghMsg = (err && err.githubMessage) || '';
+      if (status === 401) {
+        showError(`Nieprawidłowy lub wygasły token. ${ghMsg ? 'GitHub: „' + ghMsg + '". ' : ''}Wygeneruj nowy fine-grained token z uprawnieniem „Contents: Read and write".`);
+      } else if (status === 404) {
+        showError(`Nie znaleziono repozytorium ${owner}/${repo} lub gałęzi „${branch}". Sprawdź pisownię i czy token ma dostęp do tego repo.`);
+      } else if (status === 403) {
+        showError(`Brak dostępu (403). ${ghMsg ? 'GitHub: „' + ghMsg + '". ' : ''}Token nie ma uprawnień do tego repozytorium albo wyczerpał limit zapytań.`);
       } else {
-        showError(`Błąd: ${msg}`);
+        showError(`Błąd: ${ghMsg || err.message || String(err)}`);
       }
       state.config = null;
       state.token = null;
@@ -322,15 +379,7 @@
       setTimeout(() => setStatus(''), 4000);
     } catch (err) {
       console.error(err);
-      const msg = err.message || String(err);
-      if (msg.includes('409')) {
-        toast('Konflikt: ktoś inny zmienił plik. Odśwież panel (wyloguj/zaloguj), żeby pobrać świeżą wersję.', 'error');
-      } else if (msg.includes('401') || msg.includes('403')) {
-        toast('Brak autoryzacji. Zaloguj się ponownie.', 'error');
-        setTimeout(logout, 1500);
-      } else {
-        toast(`Błąd zapisu: ${msg}`, 'error');
-      }
+      handleGhError(err, 'zapisu');
       setStatus('');
     } finally {
       state.loading = false;
@@ -429,7 +478,8 @@
         markDirty();
         toast('Zdjęcie wgrane.', 'success');
       } catch (err) {
-        toast(`Błąd uploadu: ${err.message}`, 'error');
+        if (err && err.status) handleGhError(err, 'uploadu');
+        else toast(`Błąd uploadu: ${err.message}`, 'error');
       } finally {
         e.target.value = '';
       }
@@ -584,7 +634,8 @@
         markDirty();
         toast('Zdjęcie wgrane.', 'success');
       } catch (err) {
-        toast(`Błąd uploadu: ${err.message}`, 'error');
+        if (err && err.status) handleGhError(err, 'uploadu');
+        else toast(`Błąd uploadu: ${err.message}`, 'error');
       } finally {
         e.target.value = '';
       }
