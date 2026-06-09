@@ -1,79 +1,240 @@
 {
-  "site": {
-    "title": "Lisia Górka",
-    "tagline": "Dębina, Pomorze"
-  },
+  "languages": ["pl", "de", "en", "cs"],
+  "default_language": "pl",
+
   "hero": {
     "image": "/assets/images/hero-winter.jpg",
-    "image_alt": "Domki Lisia Górka w zimowej scenerii",
-    "eyebrow": "Domki na Pomorzu",
-    "headline": "Lisia Górka",
-    "subline": "Trzy domki na skraju lasu, między wydmami a borem. Dębina, kilka kroków od Bałtyku.",
+    "image_alt": {
+      "pl": "Domki Lisia Górka w Dębinie zimą",
+      "de": "Lisia Górka Ferienhäuser in Dębina im Winter",
+      "en": "Lisia Górka cottages in Dębina in winter",
+      "cs": "Chaty Lisia Górka v Dębině v zimě"
+    },
+    "eyebrow": {
+      "pl": "Domki letniskowe — Dębina",
+      "de": "Ferienhäuser — Dębina",
+      "en": "Holiday cottages — Dębina",
+      "cs": "Letní chaty — Dębina"
+    },
+    "headline": {
+      "pl": "Cisza, las i Bałtyk",
+      "de": "Stille, Wald und Ostsee",
+      "en": "Quiet, forest and the Baltic",
+      "cs": "Ticho, les a Baltské moře"
+    },
+    "subline": {
+      "pl": "Trzy domy, sześć przestronnych lokali z tarasami. Kilka minut od plaży, na skraju Słowińskiego Parku Narodowego.",
+      "de": "Drei Häuser, sechs geräumige Apartments mit Terrassen. Wenige Minuten vom Strand, am Rand des Slowinzischen Nationalparks.",
+      "en": "Three houses, six spacious apartments with terraces. A short walk to the beach, on the edge of Słowiński National Park.",
+      "cs": "Tři domy, šest prostorných apartmánů s terasami. Pár minut od pláže, na okraji Slovinského národního parku."
+    },
     "cta_primary": {
-      "label": "Zarezerwuj",
+      "label": {
+        "pl": "Zarezerwuj",
+        "de": "Reservieren",
+        "en": "Book now",
+        "cs": "Rezervovat"
+      },
       "url": "https://www.booking.com/Share-tXO2Yl"
     },
     "cta_secondary": {
-      "label": "Kontakt",
+      "label": {
+        "pl": "Kontakt",
+        "de": "Kontakt",
+        "en": "Contact",
+        "cs": "Kontakt"
+      },
       "url": "/kontakt.html"
     }
   },
+
   "sections": [
     {
-      "id": "o-kompleksie",
-      "title": "O kompleksie",
-      "eyebrow": "01 — Miejsce",
+      "id": "o-miejscu",
+      "eyebrow": {
+        "pl": "01 — Miejsce",
+        "de": "01 — Ort",
+        "en": "01 — Place",
+        "cs": "01 — Místo"
+      },
+      "title": {
+        "pl": "Czas, który zwalnia",
+        "de": "Zeit, die langsamer wird",
+        "en": "Where time slows down",
+        "cs": "Čas, který zpomalí"
+      },
+      "content": {
+        "pl": "<p>Lisia Górka leży w spokojnej, leśnej okolicy Dębiny — niewielkiej, nadmorskiej wsi w województwie pomorskim. Każdy dzień zaczyna się tu śpiewem ptaków i zapachem sosen.</p><p>To miejsce dla rodzin z dziećmi, miłośników aktywnego wypoczynku i wszystkich, którzy szukają wytchnienia od miejskiego rytmu.</p>",
+        "de": "<p>Lisia Górka liegt in der ruhigen, waldigen Umgebung von Dębina — einem kleinen Küstendorf in der Woiwodschaft Pommern. Jeder Tag beginnt hier mit Vogelgesang und dem Duft von Kiefern.</p><p>Ein Ort für Familien mit Kindern, Aktivurlauber und alle, die eine Pause vom Stadtrhythmus suchen.</p>",
+        "en": "<p>Lisia Górka sits in the quiet, forested surroundings of Dębina — a small seaside village in Pomerania. Every day here begins with birdsong and the scent of pine.</p><p>A place for families, active travellers, and anyone looking for a break from city pace.</p>",
+        "cs": "<p>Lisia Górka leží v klidném, lesnatém okolí Dębiny — malé pobřežní vesnice v Pomořském vojvodství. Každý den zde začíná zpěvem ptáků a vůní borovic.</p><p>Místo pro rodiny s dětmi, milovníky aktivního odpočinku a všechny, kdo hledají oddech od městského rytmu.</p>"
+      },
       "image": "/assets/images/cottages-summer.jpg",
-      "image_alt": "Widok z lotu ptaka na domki Lisia Górka latem",
-      "image_position": "right",
-      "content": "<p>Lisia Górka to trzy starannie zaprojektowane domki letniskowe ukryte na skraju starego boru sosnowego, w samym sercu pomorskiej Dębiny.</p><p>Każdy z nich stoi na własnej, ogrodzonej działce — z widokiem na drzewa, ciszą, którą trudno znaleźć w miastach, i poczuciem przestrzeni, jakiego nie zapewni żaden hotel.</p><p>Powstały z myślą o rodzinach i grupach przyjaciół, którzy chcą wytchnienia od zgiełku, ale nie rezygnują z komfortu.</p>"
+      "image_alt": {
+        "pl": "Domki Lisia Górka latem",
+        "de": "Lisia Górka Häuser im Sommer",
+        "en": "Lisia Górka cottages in summer",
+        "cs": "Chaty Lisia Górka v létě"
+      },
+      "image_position": "right"
     },
     {
       "id": "domki",
-      "title": "Domki",
-      "eyebrow": "02 — Wnętrza",
+      "eyebrow": {
+        "pl": "02 — Domki",
+        "de": "02 — Häuser",
+        "en": "02 — Cottages",
+        "cs": "02 — Chaty"
+      },
+      "title": {
+        "pl": "Trzy domy, sześć lokali",
+        "de": "Drei Häuser, sechs Apartments",
+        "en": "Three houses, six apartments",
+        "cs": "Tři domy, šest apartmánů"
+      },
+      "content": {
+        "pl": "<p>Oddajemy do Państwa dyspozycji <strong>trzy domy</strong>, z których każdy jest podzielony na <strong>dwa niezależne, dwupoziomowe lokale</strong> z osobnym wejściem.</p><p>Całość usytuowana jest na ogrodzonych działkach, zapewniających prywatność i swobodę wypoczynku. Każdy lokal ma własny, przestronny, słoneczny taras — idealny na poranną kawę i wieczorny odpoczynek przy szumie drzew.</p>",
+        "de": "<p>Wir bieten Ihnen <strong>drei Häuser</strong>, die jeweils in <strong>zwei separate, zweistöckige Apartments</strong> mit eigenem Eingang aufgeteilt sind.</p><p>Die gesamte Anlage liegt auf eingezäunten Grundstücken, die Privatsphäre und einen unbeschwerten Aufenthalt garantieren. Jedes Apartment verfügt über eine eigene, geräumige, sonnige Terrasse — perfekt für den Morgenkaffee oder den Abend im Rauschen der Bäume.</p>",
+        "en": "<p>We offer <strong>three houses</strong>, each divided into <strong>two independent two-storey apartments</strong> with separate entrances.</p><p>The whole property sits on fenced plots, ensuring privacy and a relaxed stay. Each apartment has its own spacious, sunny terrace — ideal for morning coffee and unwinding to the sound of trees in the evening.</p>",
+        "cs": "<p>K dispozici jsou <strong>tři domy</strong>, z nichž každý je rozdělen na <strong>dva nezávislé, dvoupodlažní apartmány</strong> s vlastním vchodem.</p><p>Celý areál se nachází na oplocených pozemcích, které zaručují soukromí a klidný pobyt. Každý apartmán má vlastní prostornou, slunnou terasu — ideální pro ranní kávu i večerní odpočinek za šumění stromů.</p>"
+      },
       "image": "/assets/images/hero-winter.jpg",
-      "image_alt": "Domki Lisia Górka zimą w słońcu",
-      "image_position": "left",
-      "content": "<p>Każdy z trzech domków mieści <strong>do 8 osób</strong> w czterech sypialniach, z dwiema łazienkami i przestronnym salonem z aneksem kuchennym.</p><p>W środku znajdziesz pełne wyposażenie kuchenne, kominek, telewizor i Wi‑Fi. Na zewnątrz — zadaszony taras z widokiem na las, miejsce na grilla i ogrodzony ogród.</p><p>Drewno, biel i światło — wnętrza są jasne, ciepłe i pozbawione zbędnego wystroju. Wszystko po to, żeby uwagę zwrócić na to, co za oknem.</p>"
+      "image_alt": {
+        "pl": "Widok z lotu ptaka na domki",
+        "de": "Luftaufnahme der Häuser",
+        "en": "Aerial view of the cottages",
+        "cs": "Letecký pohled na chaty"
+      },
+      "image_position": "left"
     },
     {
-      "id": "lokalizacja",
-      "title": "Lokalizacja",
-      "eyebrow": "03 — Mapa",
+      "id": "udogodnienia",
+      "eyebrow": {
+        "pl": "03 — Udogodnienia",
+        "de": "03 — Ausstattung",
+        "en": "03 — Amenities",
+        "cs": "03 — Vybavení"
+      },
+      "title": {
+        "pl": "Dla pełnego wypoczynku",
+        "de": "Für vollständige Erholung",
+        "en": "For full relaxation",
+        "cs": "Pro úplný odpočinek"
+      },
+      "content": {
+        "pl": "<p>Dla wygody gości przygotowaliśmy strefę wspólną z dodatkowymi udogodnieniami:</p><ul><li>Sauna</li><li>Jacuzzi</li><li>Rowery do dyspozycji</li><li>Plac zabaw dla dzieci</li><li>Duża, zadaszona altana z grillem — idealna na wspólne biesiadowanie niezależnie od pogody</li><li>Bezpłatny parking</li><li>Wi-Fi w każdym lokalu</li></ul>",
+        "de": "<p>Für Ihren Komfort haben wir einen Gemeinschaftsbereich mit zusätzlichen Annehmlichkeiten vorbereitet:</p><ul><li>Sauna</li><li>Whirlpool</li><li>Fahrräder zur freien Verfügung</li><li>Kinderspielplatz</li><li>Großer überdachter Pavillon mit Grill — ideal für geselliges Beisammensein bei jedem Wetter</li><li>Kostenlose Parkplätze</li><li>WLAN in jedem Apartment</li></ul>",
+        "en": "<p>For your comfort we have prepared a shared area with extra amenities:</p><ul><li>Sauna</li><li>Hot tub (jacuzzi)</li><li>Bicycles available for guests</li><li>Children's playground</li><li>Large covered gazebo with a BBQ — perfect for gatherings whatever the weather</li><li>Free on-site parking</li><li>Wi-Fi in every apartment</li></ul>",
+        "cs": "<p>Pro pohodlí hostů jsme připravili společnou zónu s dalším vybavením:</p><ul><li>Sauna</li><li>Vířivka (jacuzzi)</li><li>Kola k zapůjčení</li><li>Dětské hřiště</li><li>Velký zastřešený altán s grilem — ideální na společné posezení za každého počasí</li><li>Bezplatné parkování</li><li>Wi-Fi v každém apartmánu</li></ul>"
+      },
       "image": "",
-      "image_alt": "",
-      "image_position": "map",
-      "content": "<p>Dębina to niewielka wieś w województwie pomorskim, w powiecie słupskim — między Ustką a Rowami, na skraju Słowińskiego Parku Krajobrazowego.</p><p>Do plaży w Poddąbiu jedzie się <strong>kilka minut samochodem</strong> albo idzie spacerem przez bór. Ustka — 12 km. Słupsk — 30 km. Lotnisko w Gdańsku — niespełna 2 godziny drogi.</p>"
+      "image_alt": { "pl": "", "de": "", "en": "", "cs": "" },
+      "image_position": "grid"
     },
     {
-      "id": "w-okolicy",
-      "title": "W okolicy",
-      "eyebrow": "04 — Atrakcje",
+      "id": "okolica",
+      "eyebrow": {
+        "pl": "04 — Okolica",
+        "de": "04 — Umgebung",
+        "en": "04 — Surroundings",
+        "cs": "04 — Okolí"
+      },
+      "title": {
+        "pl": "Park Narodowy za rogiem",
+        "de": "Nationalpark um die Ecke",
+        "en": "National Park around the corner",
+        "cs": "Národní park za rohem"
+      },
+      "content": {
+        "pl": "<p>W pobliżu znajduje się <strong>Słowiński Park Narodowy</strong> — jedno z najpiękniejszych przyrodniczo miejsc w Polsce, słynące z unikatowych ruchomych wydm i <strong>Jeziora Gardno</strong>.</p><p>Na <strong>plażę</strong> dotrzecie malowniczym, leśnym szlakiem w około <strong>40 minut spacerem</strong> lub <strong>5 minut samochodem</strong>. W zasięgu krótkiej wycieczki: znane uzdrowisko <strong>Ustka</strong>, urokliwa nadmorska miejscowość <strong>Rowy</strong> oraz <strong>Słupsk</strong> — zabytkowe miasto z ciekawą architekturą.</p><p>Dodatkowym atutem jest przebiegający tuż obok międzynarodowy szlak rowerowy <strong>EuroVelo 10 — Baltic Sea Cycle Route</strong>, prowadzący wzdłuż wybrzeża Bałtyku.</p>",
+        "de": "<p>In der Nähe befindet sich der <strong>Slowinzische Nationalpark</strong> — einer der landschaftlich schönsten Orte Polens, berühmt für seine einzigartigen Wanderdünen und den <strong>Gardno-See</strong>.</p><p>Den <strong>Strand</strong> erreichen Sie über einen malerischen Waldweg in etwa <strong>40 Minuten zu Fuß</strong> oder <strong>5 Minuten mit dem Auto</strong>. In kurzer Reichweite: das bekannte Kurort <strong>Ustka</strong>, das charmante Küstenstädtchen <strong>Rowy</strong> und <strong>Słupsk</strong> — eine historische Stadt mit interessanter Architektur.</p><p>Ein weiteres Plus: der internationale Radweg <strong>EuroVelo 10 — Baltic Sea Cycle Route</strong> führt direkt vorbei, entlang der gesamten Ostseeküste.</p>",
+        "en": "<p>Nearby lies <strong>Słowiński National Park</strong> — one of Poland's most beautiful natural areas, famous for its unique shifting dunes and <strong>Lake Gardno</strong>.</p><p>The <strong>beach</strong> is a scenic forest walk of about <strong>40 minutes</strong>, or just <strong>5 minutes by car</strong>. Within easy reach: the well-known seaside resort of <strong>Ustka</strong>, the charming coastal village of <strong>Rowy</strong>, and <strong>Słupsk</strong> — a historic town with striking architecture.</p><p>An added bonus: the international <strong>EuroVelo 10 — Baltic Sea Cycle Route</strong> runs nearby, tracing the Baltic coast.</p>",
+        "cs": "<p>Nedaleko se nachází <strong>Slovinský národní park</strong> — jedno z přírodně nejkrásnějších míst v Polsku, proslulé unikátními pohyblivými dunami a <strong>jezerem Gardno</strong>.</p><p>Na <strong>pláž</strong> se dostanete malebnou lesní cestou asi za <strong>40 minut pěšky</strong> nebo za <strong>5 minut autem</strong>. V dosahu krátkého výletu: známé lázně <strong>Ustka</strong>, půvabné přímořské městečko <strong>Rowy</strong> a <strong>Słupsk</strong> — historické město se zajímavou architekturou.</p><p>Bonusem je mezinárodní cyklotrasa <strong>EuroVelo 10 — Baltic Sea Cycle Route</strong>, která vede těsně podél pobřeží Baltu.</p>"
+      },
       "image": "/assets/images/cottages-summer.jpg",
-      "image_alt": "Lisia Górka i otaczający las latem",
-      "image_position": "right",
-      "content": "<p>Klifowa plaża w Poddąbiu, ruchome wydmy w Słowińskim Parku Narodowym, latarnia morska w Czołpinie, port rybacki w Ustce.</p><p>Sieć ścieżek rowerowych prowadzi prosto z lasu nad morze. W sezonie — kajaki na Łupawie, rejsy z Ustki, bursztyniarskie bazary po sztormie. Zimą — puste plaże, mgła nad jeziorem Gardno, cisza w którą wsiąka się od pierwszego wieczoru.</p>"
+      "image_alt": {
+        "pl": "Okolica Dębiny",
+        "de": "Umgebung von Dębina",
+        "en": "Dębina area",
+        "cs": "Okolí Dębiny"
+      },
+      "image_position": "right"
     },
     {
-      "id": "wyposazenie",
-      "title": "Wyposażenie",
-      "eyebrow": "05 — Udogodnienia",
-      "image": "",
-      "image_alt": "",
-      "image_position": "grid",
-      "content": "<ul><li>Wi-Fi w każdym domku</li><li>Bezpłatny parking na działce</li><li>Pełne wyposażenie kuchenne</li><li>Kominek i drewno opałowe</li><li>Miejsce na grilla, ogród</li><li>Pościel i ręczniki w cenie</li><li>Plac zabaw dla dzieci</li><li>Zwierzęta mile widziane</li></ul>"
+      "id": "gospodarze",
+      "eyebrow": {
+        "pl": "05 — Gospodarze",
+        "de": "05 — Gastgeber",
+        "en": "05 — Hosts",
+        "cs": "05 — Hostitelé"
+      },
+      "title": {
+        "pl": "Ewa i Piotr",
+        "de": "Ewa und Piotr",
+        "en": "Ewa & Piotr",
+        "cs": "Ewa a Piotr"
+      },
+      "content": {
+        "pl": "<p>Jesteśmy parą stomatologów z Mszczonowa, którzy kilka lat temu odkryli Dębinę. Miejsce, które od razu nas oczarowało.</p><p>Od 2020 roku niewielki domek letniskowy stał się naszą spokojną przystanią, a Dębina — wakacyjnym sercem życia całej rodziny. Z czasem to zauroczenie przerodziło się w potrzebę stworzenia przestrzeni wypoczynku dla innych — miejsca, do którego chce się wracać i w którym naprawdę można zwolnić.</p><p>Tak powstała Lisia Górka — z miłości do natury, ciszy i prostych przyjemności.</p>",
+        "de": "<p>Wir sind ein Zahnärzte-Ehepaar aus Mszczonów, das vor einigen Jahren Dębina entdeckte. Einen Ort, der uns sofort verzaubert hat.</p><p>Seit 2020 ist ein kleines Ferienhaus unser stiller Rückzugsort und Dębina der Urlaubsmittelpunkt unserer ganzen Familie. Mit der Zeit wurde aus dieser Faszination der Wunsch, einen Erholungsraum für andere zu schaffen — einen Ort, an den man gerne zurückkehrt und an dem man wirklich entschleunigen kann.</p><p>So entstand Lisia Górka — aus Liebe zur Natur, zur Stille und zu den einfachen Freuden.</p>",
+        "en": "<p>We are a husband-and-wife pair of dentists from Mszczonów who discovered Dębina a few years ago. A place that captivated us instantly.</p><p>Since 2020 a small holiday cottage has been our quiet retreat, and Dębina the holiday heart of our family life. Over time that fascination turned into a need to create a restful space for others — a place worth returning to, where you can truly slow down.</p><p>That's how Lisia Górka was born — from a love of nature, silence and simple pleasures.</p>",
+        "cs": "<p>Jsme manželský pár stomatologů ze Mszczonowa, kteří před několika lety objevili Dębinu. Místo, které nás okamžitě okouzlilo.</p><p>Od roku 2020 se malá chata stala naším klidným útočištěm a Dębina prázdninovým srdcem života celé rodiny. Časem se toto okouzlení proměnilo v potřebu vytvořit prostor odpočinku pro ostatní — místo, kam se chce vracet a kde se opravdu dá zpomalit.</p><p>Tak vznikla Lisia Górka — z lásky k přírodě, tichu a jednoduchým radostem.</p>"
+      },
+      "image": "/assets/images/cottages-summer.jpg",
+      "image_alt": {
+        "pl": "Lisia Górka — gospodarze",
+        "de": "Lisia Górka — Gastgeber",
+        "en": "Lisia Górka — hosts",
+        "cs": "Lisia Górka — hostitelé"
+      },
+      "image_position": "left"
     }
   ],
+
   "contact": {
-    "address_lines": [
-      "Lisia Górka",
-      "Dębina, woj. pomorskie"
-    ],
-    "phone": "+48 600 000 000",
-    "phone_label": "+48 600 000 000",
-    "email": "kontakt@lisiagorka.pl",
-    "map_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2349.4!2d17.2!3d54.66!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zRMSZYmluYSwgUG9sYW5k!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl",
-    "directions": "<p><strong>Z Trójmiasta (A1, S6, DK6):</strong> około 1h 45 min jazdy. W Słupsku zjazd na Ustkę, dalej drogą wojewódzką nr 203 w stronę Rowów. W Dębinie kierować się drogowskazami w głąb wsi.</p><p><strong>Pociągiem:</strong> najbliższa stacja PKP — Ustka. Stamtąd taksówką lub busem do Dębiny (~20 min).</p><p><strong>Współrzędne GPS:</strong> 54.6601°N, 17.1869°E</p>"
+    "address_lines": {
+      "pl": ["Jutrzenki 3", "76-211 Dębina", "woj. pomorskie"],
+      "de": ["Jutrzenki 3", "76-211 Dębina", "Woiwodschaft Pommern, Polen"],
+      "en": ["Jutrzenki 3", "76-211 Dębina", "Pomerania, Poland"],
+      "cs": ["Jutrzenki 3", "76-211 Dębina", "Pomořské vojvodství, Polsko"]
+    },
+    "phone": "+48 607 613 353",
+    "phone_label": "+48 607 613 353",
+    "email": "kontakt@kaniut.pl",
+    "map_link": "https://maps.app.goo.gl/5HANiywEVaaQ5Uyo8",
+    "map_embed": "https://www.google.com/maps?q=Jutrzenki+3,+76-211+D%C4%99bina&output=embed",
+    "directions": {
+      "pl": "<p><strong>Samochodem:</strong> z Warszawy ok. 5,5 h przez Toruń i Słupsk. Z Trójmiasta ok. 2 h drogą krajową nr 6 / S6 w kierunku Ustki.</p><p><strong>Koleją:</strong> najbliższy dworzec to Słupsk (~25 km). Stamtąd taksówka lub autobus do Dębiny.</p><p><strong>Współrzędne GPS:</strong> 54.6402° N, 17.1219° E</p>",
+      "de": "<p><strong>Mit dem Auto:</strong> von Warschau ca. 5,5 h über Toruń und Słupsk. Aus dem Dreistadt-Gebiet (Danzig/Gdynia) ca. 2 h über die S6/Bundesstraße 6 Richtung Ustka.</p><p><strong>Mit der Bahn:</strong> der nächste Bahnhof ist Słupsk (~25 km). Von dort Taxi oder Bus nach Dębina.</p><p><strong>GPS-Koordinaten:</strong> 54.6402° N, 17.1219° O</p>",
+      "en": "<p><strong>By car:</strong> approx. 5.5 h from Warsaw via Toruń and Słupsk. About 2 h from the Tri-City area via the S6 / national road 6 towards Ustka.</p><p><strong>By train:</strong> the nearest station is Słupsk (~25 km). From there a taxi or bus continues to Dębina.</p><p><strong>GPS coordinates:</strong> 54.6402° N, 17.1219° E</p>",
+      "cs": "<p><strong>Autem:</strong> z Varšavy přibližně 6 h přes polské Toruň a Słupsk. Z Trojměstí (Gdaňsk) cca 2 h po silnici S6 / 6 směr Ustka.</p><p><strong>Vlakem:</strong> nejbližší stanice je Słupsk (~25 km). Odtud taxi nebo autobus do Dębiny.</p><p><strong>GPS souřadnice:</strong> 54.6402° N, 17.1219° E</p>"
+    }
+  },
+
+  "ui": {
+    "nav_contact": { "pl": "Kontakt", "de": "Kontakt", "en": "Contact", "cs": "Kontakt" },
+    "nav_book": { "pl": "Zarezerwuj", "de": "Reservieren", "en": "Book now", "cs": "Rezervovat" },
+    "menu_open": { "pl": "Menu", "de": "Menü", "en": "Menu", "cs": "Menu" },
+    "menu_close": { "pl": "Zamknij", "de": "Schließen", "en": "Close", "cs": "Zavřít" },
+    "back_to_offer": { "pl": "Wróć do oferty", "de": "Zurück zum Angebot", "en": "Back to the offer", "cs": "Zpět na nabídku" },
+    "directions_title": { "pl": "Jak dojechać", "de": "Anfahrt", "en": "Getting there", "cs": "Jak se dostat" },
+    "address_label": { "pl": "Adres", "de": "Adresse", "en": "Address", "cs": "Adresa" },
+    "phone_label": { "pl": "Telefon", "de": "Telefon", "en": "Phone", "cs": "Telefon" },
+    "email_label": { "pl": "Email", "de": "E-Mail", "en": "Email", "cs": "E-mail" },
+    "open_in_maps": { "pl": "Otwórz w Mapach Google", "de": "In Google Maps öffnen", "en": "Open in Google Maps", "cs": "Otevřít v Mapách Google" },
+    "page_kontakt": { "pl": "Kontakt", "de": "Kontakt", "en": "Contact", "cs": "Kontakt" },
+    "page_kontakt_eyebrow": { "pl": "Skontaktuj się z nami", "de": "Kontaktieren Sie uns", "en": "Get in touch", "cs": "Kontaktujte nás" },
+    "page_kontakt_subline": {
+      "pl": "Chętnie odpowiemy na pytania o dostępność, ceny lub samo miejsce.",
+      "de": "Gerne beantworten wir Ihre Fragen zu Verfügbarkeit, Preisen oder dem Ort selbst.",
+      "en": "We're happy to answer questions about availability, prices or the place itself.",
+      "cs": "Rádi odpovíme na otázky ohledně dostupnosti, cen i samotného místa."
+    },
+    "footer_rights": {
+      "pl": "Wszelkie prawa zastrzeżone",
+      "de": "Alle Rechte vorbehalten",
+      "en": "All rights reserved",
+      "cs": "Všechna práva vyhrazena"
+    }
   }
 }

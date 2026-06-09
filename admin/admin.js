@@ -15,11 +15,14 @@
     sha: null,           // sha aktualnego content/site.json (potrzebne do PUT)
     dirty: false,        // czy są niezapisane zmiany
     loading: false,
+    adminLang: 'pl',     // aktualnie edytowany język
   };
 
+  const LANGS = ['pl', 'de', 'en', 'cs'];
   const SITE_JSON_PATH = 'content/site.json';
   const LS_CONFIG = 'lg_admin_config';
   const SS_TOKEN  = 'lg_admin_token';
+  const LS_ADMIN_LANG = 'lg_admin_lang';
 
   // ----- DOM -----
   const $  = (sel, root = document) => root.querySelector(sel);
@@ -135,6 +138,98 @@
 
   async function safeText(response) {
     try { return await response.text(); } catch { return ''; }
+  }
+
+  // ============================================================================
+  // TRANSLATION HELPERS
+  // Translatable fields are stored as { pl: "...", de: "...", en: "...", cs: "..." }
+  // Plain strings are treated as same value for all languages (legacy compat).
+  // ============================================================================
+
+  // Read translatable value for the currently edited language.
+  function getTr(value) {
+    if (value == null) return '';
+    if (typeof value === 'string') return value;
+    if (typeof value === 'object') {
+      return value[state.adminLang] || value.pl || value.en || '';
+    }
+    return String(value);
+  }
+
+  // Set translatable value for the currently edited language.
+  // Returns the new translation object (caller assigns it back).
+  // If existing is a plain string, it gets promoted to {pl: existing} first.
+  function setTr(existing, newValueForCurrentLang) {
+    let obj;
+    if (typeof existing === 'string') {
+      // Promote plain string to object: assume it was Polish (the default).
+      obj = { pl: existing };
+    } else if (existing && typeof existing === 'object') {
+      obj = { ...existing };
+    } else {
+      obj = {};
+    }
+    obj[state.adminLang] = newValueForCurrentLang;
+    return obj;
+  }
+
+  // Read address_lines (special: {pl: [array], de: [array], ...}) → array for current lang.
+  function getAddressLines(contact) {
+    const al = contact && contact.address_lines;
+    if (!al) return [];
+    if (Array.isArray(al)) return al.map(x => typeof x === 'string' ? x : getTr(x));
+    if (typeof al === 'object') {
+      const arr = al[state.adminLang] || al.pl || Object.values(al).find(Array.isArray) || [];
+      return Array.isArray(arr) ? arr : [];
+    }
+    return [];
+  }
+
+  // Set address_lines for current language.
+  function setAddressLines(contact, linesArray) {
+    let obj;
+    if (Array.isArray(contact.address_lines)) {
+      // Legacy: promote to per-language object, assume Polish.
+      obj = { pl: contact.address_lines.slice() };
+    } else if (contact.address_lines && typeof contact.address_lines === 'object') {
+      obj = { ...contact.address_lines };
+    } else {
+      obj = {};
+    }
+    obj[state.adminLang] = linesArray;
+    contact.address_lines = obj;
+  }
+
+  // Language tab UI handling
+  function initAdminLangTabs() {
+    try {
+      const saved = localStorage.getItem(LS_ADMIN_LANG);
+      if (saved && LANGS.includes(saved)) state.adminLang = saved;
+    } catch (e) {}
+
+    $$('.admin-lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setAdminLang(btn.dataset.adminLang));
+    });
+    updateAdminLangButtons();
+  }
+
+  function setAdminLang(lang) {
+    if (!LANGS.includes(lang) || lang === state.adminLang) return;
+    state.adminLang = lang;
+    try { localStorage.setItem(LS_ADMIN_LANG, lang); } catch (e) {}
+    updateAdminLangButtons();
+    // Re-render all fields to show new language's values
+    if (state.data) {
+      renderHero();
+      renderSections();
+      renderContact();
+    }
+  }
+
+  function updateAdminLangButtons() {
+    $$('.admin-lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.adminLang === state.adminLang);
+    });
   }
 
   // Translate a GitHub API error into a user-friendly toast.
@@ -438,34 +533,35 @@
     const h = state.data.hero;
     els.heroImageUrl.value = h.image || '';
     els.heroImagePreview.src = h.image || '';
-    els.heroImagePreview.alt = h.image_alt || '';
-    els.heroAlt.value      = h.image_alt || '';
-    els.heroEyebrow.value  = h.eyebrow   || '';
-    els.heroHeadline.value = h.headline  || '';
-    els.heroSubline.value  = h.subline   || '';
-    els.heroCta1Lbl.value  = h.cta_primary.label   || '';
-    els.heroCta1Url.value  = h.cta_primary.url     || '';
-    els.heroCta2Lbl.value  = h.cta_secondary.label || '';
-    els.heroCta2Url.value  = h.cta_secondary.url   || '';
+    els.heroImagePreview.alt = getTr(h.image_alt);
+    els.heroAlt.value      = getTr(h.image_alt);
+    els.heroEyebrow.value  = getTr(h.eyebrow);
+    els.heroHeadline.value = getTr(h.headline);
+    els.heroSubline.value  = getTr(h.subline);
+    els.heroCta1Lbl.value  = getTr(h.cta_primary && h.cta_primary.label);
+    els.heroCta1Url.value  = (h.cta_primary && h.cta_primary.url) || '';
+    els.heroCta2Lbl.value  = getTr(h.cta_secondary && h.cta_secondary.label);
+    els.heroCta2Url.value  = (h.cta_secondary && h.cta_secondary.url) || '';
   }
 
   function bindHeroFields() {
+    // Fields and how to write them back. Translatable fields use setTr; image/url fields are plain strings.
     const map = [
       [els.heroImageUrl, v => { state.data.hero.image = v; els.heroImagePreview.src = v; }],
-      [els.heroAlt,      v => { state.data.hero.image_alt = v; els.heroImagePreview.alt = v; }],
-      [els.heroEyebrow,  v => { state.data.hero.eyebrow = v; }],
-      [els.heroHeadline, v => { state.data.hero.headline = v; }],
-      [els.heroSubline,  v => { state.data.hero.subline = v; }],
-      [els.heroCta1Lbl,  v => { state.data.hero.cta_primary.label = v; }],
+      [els.heroAlt,      v => { state.data.hero.image_alt = setTr(state.data.hero.image_alt, v); els.heroImagePreview.alt = v; }],
+      [els.heroEyebrow,  v => { state.data.hero.eyebrow = setTr(state.data.hero.eyebrow, v); }],
+      [els.heroHeadline, v => { state.data.hero.headline = setTr(state.data.hero.headline, v); }],
+      [els.heroSubline,  v => { state.data.hero.subline = setTr(state.data.hero.subline, v); }],
+      [els.heroCta1Lbl,  v => { state.data.hero.cta_primary.label = setTr(state.data.hero.cta_primary.label, v); }],
       [els.heroCta1Url,  v => { state.data.hero.cta_primary.url = v; }],
-      [els.heroCta2Lbl,  v => { state.data.hero.cta_secondary.label = v; }],
+      [els.heroCta2Lbl,  v => { state.data.hero.cta_secondary.label = setTr(state.data.hero.cta_secondary.label, v); }],
       [els.heroCta2Url,  v => { state.data.hero.cta_secondary.url = v; }],
     ];
     map.forEach(([el, setter]) => {
       el.addEventListener('input', () => { setter(el.value); markDirty(); });
     });
 
-    // upload pliku do hero
+    // upload pliku do hero (image url stays as plain string)
     const heroFileInput = $('input[type="file"][data-upload-target="hero-image-url"]');
     heroFileInput.addEventListener('change', async (e) => {
       const file = e.target.files[0];
@@ -492,22 +588,21 @@
 
   function renderContact() {
     const c = state.data.contact;
-    els.contactAddress.value    = (c.address_lines || []).join('\n');
+    els.contactAddress.value    = getAddressLines(c).join('\n');
     els.contactPhone.value      = c.phone || '';
     els.contactEmail.value      = c.email || '';
     els.contactMap.value        = c.map_embed || '';
-    els.contactDirections.value = c.directions || '';
+    els.contactDirections.value = getTr(c.directions);
   }
 
   function bindContactFields() {
     els.contactAddress.addEventListener('input', () => {
-      state.data.contact.address_lines = els.contactAddress.value
-        .split('\n').map(s => s.trim()).filter(Boolean);
+      const lines = els.contactAddress.value.split('\n').map(s => s.trim()).filter(Boolean);
+      setAddressLines(state.data.contact, lines);
       markDirty();
     });
     els.contactPhone.addEventListener('input', () => {
       state.data.contact.phone = els.contactPhone.value;
-      // jeśli phone_label jest "synem" telefonu, też aktualizuj
       state.data.contact.phone_label = els.contactPhone.value;
       markDirty();
     });
@@ -520,7 +615,7 @@
       markDirty();
     });
     els.contactDirections.addEventListener('input', () => {
-      state.data.contact.directions = els.contactDirections.value;
+      state.data.contact.directions = setTr(state.data.contact.directions, els.contactDirections.value);
       markDirty();
     });
   }
@@ -550,7 +645,7 @@
     const delBtn    = node.querySelector('[data-action="delete"]');
 
     numEl.textContent = String(idx + 1).padStart(2, '0');
-    titleEl.textContent = section.title || '(bez tytułu)';
+    titleEl.textContent = getTr(section.title) || '(bez tytułu)';
 
     // pola
     const fields = {
@@ -566,16 +661,16 @@
     const imagePreview   = node.querySelector('[data-section-image-preview]');
     const fileInput      = node.querySelector('[data-section-upload]');
 
-    // wartości startowe
-    fields.title.value          = section.title || '';
+    // wartości startowe — tłumaczalne pola czytamy przez getTr
+    fields.title.value          = getTr(section.title);
     fields.id.value             = section.id || '';
-    fields.eyebrow.value        = section.eyebrow || '';
+    fields.eyebrow.value        = getTr(section.eyebrow);
     fields.image_position.value = section.image_position || 'right';
     fields.image.value          = section.image || '';
-    fields.image_alt.value      = section.image_alt || '';
-    fields.content.value        = section.content || '';
+    fields.image_alt.value      = getTr(section.image_alt);
+    fields.content.value        = getTr(section.content);
     imagePreview.src            = section.image || '';
-    imagePreview.alt            = section.image_alt || '';
+    imagePreview.alt            = getTr(section.image_alt);
 
     updateImageVisibility(imageFieldWrap, fields.image_position.value);
 
@@ -587,10 +682,10 @@
       node.classList.toggle('is-open', !expanded);
     });
 
-    // bind zmian
+    // bind zmian — tłumaczalne pola przez setTr (tylko bieżący język)
     fields.title.addEventListener('input', () => {
-      section.title = fields.title.value;
-      titleEl.textContent = section.title || '(bez tytułu)';
+      section.title = setTr(section.title, fields.title.value);
+      titleEl.textContent = fields.title.value || '(bez tytułu)';
       markDirty();
     });
     fields.id.addEventListener('input', () => {
@@ -599,7 +694,7 @@
       markDirty();
     });
     fields.eyebrow.addEventListener('input', () => {
-      section.eyebrow = fields.eyebrow.value;
+      section.eyebrow = setTr(section.eyebrow, fields.eyebrow.value);
       markDirty();
     });
     fields.image_position.addEventListener('change', () => {
@@ -613,12 +708,12 @@
       markDirty();
     });
     fields.image_alt.addEventListener('input', () => {
-      section.image_alt = fields.image_alt.value;
-      imagePreview.alt = section.image_alt;
+      section.image_alt = setTr(section.image_alt, fields.image_alt.value);
+      imagePreview.alt = fields.image_alt.value;
       markDirty();
     });
     fields.content.addEventListener('input', () => {
-      section.content = fields.content.value;
+      section.content = setTr(section.content, fields.content.value);
       markDirty();
     });
 
@@ -646,7 +741,7 @@
     downBtn.addEventListener('click', (e) => { e.stopPropagation(); moveSection(idx, +1); });
     delBtn.addEventListener('click',  (e) => {
       e.stopPropagation();
-      if (confirm(`Usunąć sekcję „${section.title || section.id}"?`)) {
+      if (confirm(`Usunąć sekcję „${getTr(section.title) || section.id}"?`)) {
         state.data.sections.splice(idx, 1);
         markDirty();
         renderSections();
@@ -674,12 +769,12 @@
     const next = state.data.sections.length + 1;
     state.data.sections.push({
       id: `sekcja-${next}`,
-      title: 'Nowa sekcja',
-      eyebrow: `${String(next).padStart(2, '0')} — `,
+      title:    { [state.adminLang]: 'Nowa sekcja' },
+      eyebrow:  { [state.adminLang]: `${String(next).padStart(2, '0')} — ` },
       image: '',
-      image_alt: '',
+      image_alt: { [state.adminLang]: '' },
       image_position: 'right',
-      content: '<p>Treść sekcji…</p>',
+      content:  { [state.adminLang]: '<p>Treść sekcji…</p>' },
     });
     markDirty();
     renderSections();
@@ -763,6 +858,7 @@
 
   function init() {
     loadStoredConfig();
+    initAdminLangTabs();
     bindHeroFields();
     bindContactFields();
     bindTabs();

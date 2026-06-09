@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kontakt — Lisia Górka, Dębina</title>
-  <meta name="description" content="Skontaktuj się z nami. Adres, telefon, email i wskazówki dojazdu do domków Lisia Górka w Dębinie.">
+  <meta name="description" content="Skontaktuj się z nami. Adres, telefon, email i wskazówki dojazdu do Lisiej Górki w Dębinie.">
   <meta name="theme-color" content="#f6f0e4">
 
   <link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg">
@@ -15,25 +15,31 @@
   <!-- HEADER (always solid bg on subpages) -->
   <header class="site-header dark-bg scrolled" id="site-header" style="position: relative;">
     <div class="container header-inner">
-      <a href="/" class="brand" aria-label="Lisia Górka — strona główna">
-        <img src="/assets/images/logo.svg" alt="Lisia Górka — Dębina" class="brand-logo brand-logo-dark">
+      <a href="/" class="brand" aria-label="Lisia Górka">
+        <img src="/assets/images/logo.svg" alt="Lisia Górka" class="brand-logo brand-logo-dark">
       </a>
 
-      <button class="menu-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="header-nav" id="menu-toggle">
+      <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="header-nav" id="menu-open">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M3 6h18M3 12h18M3 18h18"/>
         </svg>
       </button>
 
       <nav class="header-nav" id="header-nav" aria-label="Główne">
-        <button class="menu-close" aria-label="Zamknij menu" id="menu-close">
+        <button class="menu-close" aria-label="Zamknij" id="menu-close">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M6 6l12 12M18 6l-12 12"/>
           </svg>
         </button>
-        <a href="/">Oferta</a>
-        <a href="/kontakt.html">Kontakt</a>
-        <a href="https://www.booking.com/Share-tXO2Yl" class="btn btn-ghost" target="_blank" rel="noopener" id="nav-cta-book">Zarezerwuj</a>
+        <a href="/" data-i18n="back_to_offer">Wróć do oferty</a>
+        <a href="https://www.booking.com/Share-tXO2Yl" class="btn btn-ghost" target="_blank" rel="noopener" id="nav-cta-book" data-i18n="nav_book">Zarezerwuj</a>
+
+        <div class="lang-switcher" role="group" aria-label="Język">
+          <button type="button" class="lang-btn" data-lang="pl">PL</button>
+          <button type="button" class="lang-btn" data-lang="de">DE</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="cs">CZ</button>
+        </div>
       </nav>
     </div>
   </header>
@@ -41,8 +47,9 @@
   <!-- PAGE HERO -->
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Skontaktuj się z nami</div>
-      <h1>Zadzwoń, napisz, lub po&nbsp;prostu <span class="accent">wpadnij</span></h1>
+      <div class="eyebrow" data-i18n="page_kontakt_eyebrow">Skontaktuj się z nami</div>
+      <h1 data-i18n="page_kontakt">Kontakt</h1>
+      <p class="page-hero-subline" data-i18n="page_kontakt_subline">Chętnie odpowiemy na pytania o dostępność, ceny lub samo miejsce.</p>
     </div>
   </section>
 
@@ -53,25 +60,26 @@
         <div class="contact-info">
 
           <div class="contact-block">
-            <div class="eyebrow">Adres</div>
+            <div class="eyebrow" data-i18n="address_label">Adres</div>
             <div class="value" id="contact-address">
-              Lisia Górka<br>
-              Dębina, woj. pomorskie
+              Jutrzenki 3<br>
+              76-211 Dębina
             </div>
+            <a href="https://maps.app.goo.gl/5HANiywEVaaQ5Uyo8" class="contact-map-link" id="contact-map-link" target="_blank" rel="noopener" data-i18n="open_in_maps">Otwórz w Mapach Google</a>
           </div>
 
           <div class="contact-block">
-            <div class="eyebrow">Telefon</div>
-            <a href="tel:+48600000000" class="value" id="contact-phone">+48 600 000 000</a>
+            <div class="eyebrow" data-i18n="phone_label">Telefon</div>
+            <a href="tel:+48607613353" class="value" id="contact-phone">+48 607 613 353</a>
           </div>
 
           <div class="contact-block">
-            <div class="eyebrow">Email</div>
-            <a href="mailto:kontakt@lisiagorka.pl" class="value" id="contact-email">kontakt@lisiagorka.pl</a>
+            <div class="eyebrow" data-i18n="email_label">Email</div>
+            <a href="mailto:kontakt@kaniut.pl" class="value" id="contact-email">kontakt@kaniut.pl</a>
           </div>
 
           <div class="contact-block">
-            <div class="eyebrow">Rezerwacja</div>
+            <div class="eyebrow" data-i18n="nav_book">Rezerwacja</div>
             <a href="https://www.booking.com/Share-tXO2Yl" class="value" target="_blank" rel="noopener">booking.com →</a>
           </div>
 
@@ -79,11 +87,11 @@
 
         <div class="contact-map" id="contact-map">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2349.4!2d17.2!3d54.66!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zRMSZYmluYSwgUG9sYW5k!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl"
+            src="https://www.google.com/maps?q=Jutrzenki+3,+76-211+D%C4%99bina&output=embed"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="Mapa — Lisia Górka, Dębina">
+            title="Mapa">
           </iframe>
         </div>
       </div>
@@ -94,12 +102,11 @@
   <section class="directions">
     <div class="container">
       <div class="directions-inner">
-        <div class="eyebrow">Wskazówki dojazdu</div>
-        <h2>Jak do nas <span class="accent">trafić</span></h2>
+        <h2 data-i18n="directions_title">Jak dojechać</h2>
         <div id="contact-directions">
-          <p><strong>Z Trójmiasta (A1, S6, DK6):</strong> około 1h 45 min jazdy. W Słupsku zjazd na Ustkę, dalej drogą wojewódzką nr 203 w stronę Rowów. W Dębinie kierować się drogowskazami w głąb wsi.</p>
-          <p><strong>Pociągiem:</strong> najbliższa stacja PKP — Ustka. Stamtąd taksówką lub busem do Dębiny (~20 min).</p>
-          <p><strong>Współrzędne GPS:</strong> 54.6601°N, 17.1869°E</p>
+          <p><strong>Samochodem:</strong> z Warszawy ok. 5,5 h przez Toruń i Słupsk. Z Trójmiasta ok. 2 h drogą krajową nr 6 / S6 w kierunku Ustki.</p>
+          <p><strong>Koleją:</strong> najbliższy dworzec to Słupsk (~25 km). Stamtąd taksówka lub autobus do Dębiny.</p>
+          <p><strong>Współrzędne GPS:</strong> 54.6402° N, 17.1219° E</p>
         </div>
       </div>
     </div>
@@ -111,25 +118,25 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <div class="brand">
-            <img src="/assets/images/logo-light.svg" alt="Lisia Górka — Dębina" class="brand-logo">
+            <img src="/assets/images/logo-light.svg" alt="Lisia Górka" class="brand-logo">
           </div>
           <div class="footer-info">
-            <p id="footer-address">Lisia Górka, Dębina, woj. pomorskie</p>
+            <p id="footer-address">Jutrzenki 3, 76-211 Dębina</p>
           </div>
         </div>
         <div class="footer-meta">
           <div class="footer-meta-row">
-            <a href="tel:+48600000000" id="footer-phone">+48 600 000 000</a>
-            <a href="mailto:kontakt@lisiagorka.pl" id="footer-email">kontakt@lisiagorka.pl</a>
+            <a href="tel:+48607613353" id="footer-phone">+48 607 613 353</a>
+            <a href="mailto:kontakt@kaniut.pl" id="footer-email">kontakt@kaniut.pl</a>
           </div>
           <div class="footer-meta-row" style="margin-top: 1rem;">
-            <a href="/">Oferta</a>
-            <a href="https://www.booking.com/Share-tXO2Yl" target="_blank" rel="noopener">Rezerwacja</a>
+            <a href="/" data-i18n="back_to_offer">Wróć do oferty</a>
+            <a href="https://www.booking.com/Share-tXO2Yl" target="_blank" rel="noopener" data-i18n="nav_book">Zarezerwuj</a>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© <span id="year">2026</span> Lisia Górka. Wszelkie prawa zastrzeżone.</span>
+        <span>© <span id="footer-year">2026</span> Lisia Górka. <span data-i18n="footer_rights">Wszelkie prawa zastrzeżone</span>.</span>
         <span><a href="/admin/">Panel admina</a></span>
       </div>
     </div>

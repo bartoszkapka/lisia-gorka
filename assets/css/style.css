@@ -234,9 +234,14 @@ strong { font-weight: 600; color: var(--text); }
 }
 
 .brand-logo {
-  height: 56px;
+  height: 74px;
   width: auto;
   display: block;
+  transition: height 0.3s var(--ease);
+}
+
+.site-header.scrolled .brand-logo {
+  height: 56px;
 }
 
 /* Header on homepage: show light logo over dark hero, swap to dark on scroll */
@@ -376,7 +381,6 @@ strong { font-weight: 600; color: var(--text); }
   max-width: 14ch;
 }
 .hero h1 .accent {
-  font-style: italic;
   font-weight: 300;
   color: var(--primary);
 }
@@ -511,7 +515,6 @@ strong { font-weight: 600; color: var(--text); }
 .section-content .eyebrow { margin-bottom: 1.25rem; }
 .section-content h2 { margin-bottom: 1.5rem; }
 .section-content h2 .accent {
-  font-style: italic;
   font-weight: 400;
   color: var(--primary);
 }
@@ -564,7 +567,7 @@ strong { font-weight: 600; color: var(--text); }
   height: 100%;
   border: 0;
   display: block;
-  filter: grayscale(0.15) contrast(1.05);
+  filter: saturate(0.55) hue-rotate(-8deg) sepia(0.18) brightness(0.96) contrast(0.95);
 }
 
 /* Amenities grid section */
@@ -645,7 +648,6 @@ strong { font-weight: 600; color: var(--text); }
 .page-hero .eyebrow { margin-bottom: 1rem; }
 .page-hero h1 { max-width: 18ch; margin-bottom: 0; }
 .page-hero h1 .accent {
-  font-style: italic;
   color: var(--primary);
 }
 
@@ -699,7 +701,7 @@ strong { font-weight: 600; color: var(--text); }
   height: 100%;
   border: 0;
   display: block;
-  filter: grayscale(0.15) contrast(1.05);
+  filter: saturate(0.55) hue-rotate(-8deg) sepia(0.18) brightness(0.96) contrast(0.95);
 }
 
 @media (min-width: 900px) {
@@ -891,3 +893,82 @@ strong { font-weight: 600; color: var(--text); }
   justify-content: center;
   flex-wrap: wrap;
 }
+
+/* =========================================================
+   LANGUAGE SWITCHER
+   ========================================================= */
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 2px;
+  margin-left: 0.5rem;
+  opacity: 0.85;
+}
+.lang-btn {
+  background: transparent;
+  color: inherit;
+  border: 0;
+  font-family: var(--ff-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.35em 0.7em;
+  cursor: pointer;
+  border-radius: 999px;
+  line-height: 1;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+.lang-btn:hover { opacity: 0.7; }
+
+/* Active button: filled chip with inverted text. Default for cream/dark contexts. */
+.lang-btn.active {
+  background: var(--text);
+  color: var(--bg);
+  pointer-events: none;
+}
+
+/* On hero (transparent header over dark photo): white outline + filled active */
+.site-header:not(.scrolled):not(.dark-bg) .lang-switcher { color: #fff; }
+.site-header:not(.scrolled):not(.dark-bg) .lang-btn.active {
+  background: #fff;
+  color: var(--text);
+}
+
+/* On dark footer only — header subpages have a CREAM background (.scrolled wins over .dark-bg) */
+.site-footer .lang-switcher { color: var(--bg); }
+.site-footer .lang-btn.active {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Mobile: lang switcher inside opened menu */
+@media (max-width: 800px) {
+  .lang-switcher {
+    margin-left: 0;
+    margin-top: 1rem;
+    align-self: center;
+  }
+}
+
+/* Page hero subline */
+.page-hero-subline {
+  margin-top: 1.25rem;
+  max-width: 38rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* Contact map link */
+.contact-map-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.contact-map-link:hover { opacity: 0.75; }
