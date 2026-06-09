@@ -110,7 +110,7 @@ ul, ol { padding-left: 1.25em; }
 }
 
 h1 { font-size: clamp(2.25rem, 5.8vw, 4.5rem); line-height: 1.02; }
-h2 { font-size: clamp(1.65rem, 3.8vw, 2.85rem); line-height: 1.1; }
+h2 { font-size: clamp(2rem, 4.5vw, 3.5rem); line-height: 1.05; }
 h3 { font-size: clamp(1.2rem, 2.1vw, 1.55rem); line-height: 1.2; }
 
 .eyebrow {
@@ -118,7 +118,7 @@ h3 { font-size: clamp(1.2rem, 2.1vw, 1.55rem); line-height: 1.2; }
   font-size: 0.78rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.12em;
   color: var(--primary);
   display: inline-block;
 }
@@ -439,7 +439,7 @@ strong { font-weight: 600; color: var(--text); }
    ========================================================= */
 .submenu {
   position: sticky;
-  top: 0;
+  top: 80px; /* sits below fixed header (which is ~80px tall when scrolled) */
   z-index: 40;
   background: var(--bg);
   border-bottom: 1px solid var(--rule);
@@ -972,3 +972,23 @@ strong { font-weight: 600; color: var(--text); }
   text-underline-offset: 3px;
 }
 .contact-map-link:hover { opacity: 0.75; }
+
+/* =========================================================
+   HEADER NAV BUTTON — extra breathing room
+   ========================================================= */
+.header-nav .btn {
+  padding: 0.85em 1.9em;
+}
+
+/* On mobile, submenu sits below a shorter header */
+@media (max-width: 800px) {
+  .submenu { top: 68px; }
+}
+
+/* Scroll-padding so anchor links (#miejsce etc.) land below sticky header + submenu */
+html {
+  scroll-padding-top: 140px; /* header (~80px) + submenu (~60px) */
+}
+@media (max-width: 800px) {
+  html { scroll-padding-top: 128px; }
+}
